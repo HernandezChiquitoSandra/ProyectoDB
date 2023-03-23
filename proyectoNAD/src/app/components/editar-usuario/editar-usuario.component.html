@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+    <link rel="stylesheet" href="./editar-usuario.component.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <!-- <a href="https://front.codes/" class="logo" target="_blank">
+        <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+</a> -->
+    <div style="margin-left: 400px; margin-right: 400px;">
+        <form class="mb-3" [formGroup]="usuarioForm" (ngSubmit)="crearCuenta()">
+            <h2 class="mb-4 pb-3 titulo text-center" style="margin-top: 50px;">Editar Usuario</h2>
+            <div class="form-group">
+                <input type="text" name="logname" class="form-style" placeholder="Nombre" id="logname"
+                    formControlName="nombreUsuario">
+                <i class="input-icon uil uil-user"></i>
+                <div class="text-danger"
+                    *ngIf="usuarioForm.get('nombreUsuario')?.hasError('required') && usuarioForm.get('nombreUsuario')?.touched">
+                    <span>*Este campo <strong>es obligatorio!!!</strong>*</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" name="logname" class="form-style" placeholder="Apellido Paterno" id="logname"
+                    formControlName="apePaterno">
+                <i class="input-icon uil uil-user"></i>
+                <div class="text-danger"
+                    *ngIf="usuarioForm.get('apePaterno')?.hasError('required') && usuarioForm.get('apePaterno')?.touched">
+                    <span>*Este campo <strong>es obligatorio!!!</strong>*</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" name="logname" class="form-style" placeholder="Apellido Materno" id="logname"
+                    formControlName="apeMaterno">
+                <i class="input-icon uil uil-user"></i>
+                <div class="text-danger"
+                    *ngIf="usuarioForm.get('apeMaterno')?.hasError('required') && usuarioForm.get('apeMaterno')?.touched">
+                    <span>*Este campo <strong>es obligatorio!!!</strong>*</span>
+                </div>
+            </div>
+            <!-- <div class="form-group mt-2">
+                <input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail"
+                    formControlName="email">
+                <i class="input-icon uil uil-at"></i>
+                <div class="text-danger"
+                    *ngIf="usuarioForm.get('email')?.hasError('required') && usuarioForm.get('email')?.touched">
+                    <span>*Este campo <strong>es obligatorio!!!</strong>*</span>
+                </div>
+            </div> -->
+            <div class="form-group mt-2">
+                <input type="number" name="logpass" class="form-style" placeholder="Edad" id="logpass"
+                    formControlName="edad">
+                <i class="input-icon uil uil-user"></i>
+            </div>
+            <div class="form-group">
+                <select name="dropdown" class="form-style" id="dropdown" formControlName="genero">
+                    <option value="" disabled selected>Genero</option>
+                    <option value="H">H</option>
+                    <option value="M">M</option>
+                    <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                </select>
+                <i class="input-icon uil uil-angle-down"></i>
+            </div>
+            <div class="form-group">
+                <select name="dropdown" class="form-style" id="dropdown" formControlName="rol">
+                    <option value="" disabled selected>Rol</option>
+                    <option *ngFor="let rol of listRoles" [value]="rol.tipoRol">{{
+                        rol.tipoRol }}</option>
+                </select>
+                <i class="input-icon uil uil-angle-down"></i>
+            </div>
+            <div class="form-group">
+                <select name="dropdown" class="form-style" id="dropdown" formControlName="empresa">
+                    <option value="" disabled selected>Empresa</option>
+                    <option *ngFor="let empresa of listEmpresas" [value]="empresa.nombreEmpresa">{{
+                        empresa.nombreEmpresa }}
+                    </option>
+                </select>
+                <i class="input-icon uil uil-angle-down"></i>
+            </div>
+            <!-- <div class="form-group mt-2">
+                <input type="password" name="logpass" class="form-style" placeholder="Contraseña" id="logpass"
+                    formControlName="contrasena">
+                <i class="input-icon uil uil-lock-alt"></i>
+                <div class="text-danger"
+                    *ngIf="usuarioForm.get('contrasena')?.hasError('required') && usuarioForm.get('contrasena')?.touched">
+                    <span>*Este campo <strong>es obligatorio!!!</strong>*</span>
+                </div>
+            </div> -->
+            <button class="btn mt-4" type="submit" [disabled]="usuarioForm.invalid">submit</button>
+        </form>
+    </div>
+    <!-- partial -->
+</body>
+</html>

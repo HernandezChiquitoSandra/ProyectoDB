@@ -1,0 +1,112 @@
+<!--Boton modal-->
+<style>
+  .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+</style>
+<!--Boton para el abrir modal-->
+<button class="btn btn-primary" (click)="openModal()"> 
+  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+</svg></button>
+<!--termina boton-->
+
+<div class="" *ngIf="modalSwitch==true">
+
+  <app-usuario-estandar></app-usuario-estandar>
+  
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-10 offset-lg-1">
+      <div class="card">
+        <div class="card-body text-center">
+          <span class="titulo">LISTADO DE CLIENTES</span>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="filtro" class="form-label">Buscar por:</label>
+              <select id="filtro" class="form-select"  [(ngModel)]="filtro" (change)="handleChangeFiltro($event)">
+                <option value="null">Todos</option>
+                <option value="nombreUsuario">Nombre Usuario</option>
+                <option value="apePaterno">Apellido Paterno</option>
+                <option value="apeMaterno">Apellido Materno</option>
+                <option value="edad">Edad</option>
+                <option value="genero">Genero</option>
+                <option value="empresa">Empresa</option>
+                <option value="rol">Rol</option>
+                <option value="status">status</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="campo" class="form-label">Ordenar por:</label>
+              <select id="campo" class="form-select" [(ngModel)]="campo" (change)="handleChangeCampo($event)">
+                <option value="nombreUsuario">Nombre Usuario</option>
+                <option value="apePaterno">Apellido Paterno</option>
+                <option value="apeMaterno">Apellido Materno</option>
+                <option value="edad">Edad</option>
+                <option value="genero">Genero</option>
+                <option value="empresa">Empresa</option>
+                <option value="rol">Rol</option>
+                <option value="status">status</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <div class="input-group" style="margin-top: 33px;">
+                <input type="text" class="form-control" placeholder="Valor del Filtro" #inputValor>
+                <button class="btn btn-outline-secondary" type="button"
+                  (click)="handleChangeInput(inputValor.value)">Enviar</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="orden" class="form-label">Orden:</label>
+              <select id="orden" class="form-select" [(ngModel)]="orden" (change)="handleChangeOrden($event)">
+                <option value="1">Ascendente</option>
+                <option value="-1">Descendente</option>
+              </select>
+            </div>
+          </div>
+          <table class="table table-hover mt-3" *ngIf="usuarios.length>0">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido Paterno</th>
+                <th scope="col">Apellido Materno</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Genero</th>
+                <th scope="col">Email</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of usuarios">
+                <td>{{usuario.nombreUsuario}}</td>
+                <td>{{usuario.apePaterno}}</td>
+                <td>{{usuario.apeMaterno}}</td>
+                <td>{{usuario.edad}}</td>
+                <td>{{usuario.genero}}</td>
+                <td>{{usuario.email}}</td>
+                <td>{{usuario.empresa}}</td>
+                <td>{{usuario.rol}}</td>
+                <td>{{usuario.status}}</td>
+                <td>
+                  <i class="fa-sharp fa-solid fa-user-slash text-danger" (click)="eliminarUsuario(usuario._id)"></i>
+                  <i class="fa-sharp fa-solid fa-user text-success" (click)="eliminarUsuario(usuario._id)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h5 style="text-align: start; margin-top: 10px;" *ngIf="usuarios.length == 0">!No hay datos para mostrar! :(
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
